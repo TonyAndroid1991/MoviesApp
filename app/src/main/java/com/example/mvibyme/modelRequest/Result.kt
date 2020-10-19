@@ -2,7 +2,7 @@ package com.example.mvibyme.modelRequest
 
 import java.io.Serializable
 
-data class Results(
+data class Result(
     val popularity: Double,
     val vote_count: Int,
     val video: Boolean,

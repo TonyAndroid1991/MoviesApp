@@ -5,8 +5,9 @@ import android.os.Bundle
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.mvibyme.App
 import com.example.mvibyme.R
+import com.example.mvibyme.fragments.SlideshowFragment
 import com.example.mvibyme.recyclerview.MoviesRecycler
-import com.example.mvibyme.modelRequest.Results
+import com.example.mvibyme.modelRequest.Result
 import io.reactivex.Flowable
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.schedulers.Schedulers.io
@@ -16,7 +17,7 @@ import javax.inject.Inject
 class MainActivity : AppCompatActivity() {
 
     @Inject
-    lateinit var results: Flowable<ArrayList<Results>>
+    lateinit var result: Flowable<ArrayList<Result>>
 
     lateinit var moviesRecycler: MoviesRecycler
 
@@ -25,7 +26,18 @@ class MainActivity : AppCompatActivity() {
         setContentView(R.layout.activity_main)
         (application as App).getComponent().inject(this)
 
-        results.subscribeOn(io())
+        val slideshowFragment = SlideshowFragment.newInstance()
+
+        supportFragmentManager.beginTransaction().apply {
+            replace(R.id.slideshow_fragment, slideshowFragment)
+            commit()
+        }
+
+        loadInfo()
+    }
+
+    fun loadInfo() {
+        result.subscribeOn(io())
             .observeOn(AndroidSchedulers.mainThread())
             .subscribe {res ->
                 recycler.apply {
@@ -35,7 +47,6 @@ class MainActivity : AppCompatActivity() {
                 }
             }
     }
-
 
 
 ///**no borrar*/
