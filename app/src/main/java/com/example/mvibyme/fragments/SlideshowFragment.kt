@@ -9,7 +9,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.mvibyme.App
 import com.example.mvibyme.R
 import com.example.mvibyme.modelRequest.Result
-import com.example.mvibyme.recyclerview.SlideshowRecyclerView
+import com.example.mvibyme.recyclerview.SlideShowAdapter
 import io.reactivex.Flowable
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.schedulers.Schedulers.io
@@ -27,7 +27,6 @@ class SlideshowFragment : Fragment() {
     @Inject
     lateinit var result: Flowable<ArrayList<Result>>
 
-    lateinit var slideshowRecyclerView: SlideshowRecyclerView
     var topList: ArrayList<Result> = ArrayList()
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -61,8 +60,8 @@ class SlideshowFragment : Fragment() {
                 }
 
                 slideshow_recycler.apply {
-                    layoutManager = LinearLayoutManager(activity)
-                    adapter = SlideshowRecyclerView(topList)
+                    layoutManager = LinearLayoutManager(activity, LinearLayoutManager.HORIZONTAL, false)
+                    adapter = SlideShowAdapter(topList)
 
                 }
             }
@@ -73,8 +72,6 @@ class SlideshowFragment : Fragment() {
         fun newInstance() =
             SlideshowFragment().apply {
                 arguments = Bundle().apply {
-
-
                 }
             }
     }

@@ -10,7 +10,7 @@ import com.bumptech.glide.request.RequestOptions
 import com.example.mvibyme.R
 import com.example.mvibyme.modelRequest.Result
 
-class SlideshowRecyclerView(var topList: ArrayList<Result>): RecyclerView.Adapter<RecyclerView.ViewHolder>() {
+class SlideShowAdapter(var topList: ArrayList<Result>): RecyclerView.Adapter<RecyclerView.ViewHolder>() {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder {
         return SlideshowViewHolder(LayoutInflater.from(parent.context).inflate(R.layout.slideshow_item, parent, false))

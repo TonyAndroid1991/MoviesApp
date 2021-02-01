@@ -6,7 +6,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.mvibyme.App
 import com.example.mvibyme.R
 import com.example.mvibyme.fragments.SlideshowFragment
-import com.example.mvibyme.recyclerview.MoviesRecycler
+import com.example.mvibyme.recyclerview.MainRecyclerAdapter
 import com.example.mvibyme.modelRequest.Result
 import io.reactivex.Flowable
 import io.reactivex.android.schedulers.AndroidSchedulers
@@ -19,7 +19,7 @@ class MainActivity : AppCompatActivity() {
     @Inject
     lateinit var result: Flowable<ArrayList<Result>>
 
-    lateinit var moviesRecycler: MoviesRecycler
+    lateinit var moviesRecycler: MainRecyclerAdapter
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -40,9 +40,9 @@ class MainActivity : AppCompatActivity() {
         result.subscribeOn(io())
             .observeOn(AndroidSchedulers.mainThread())
             .subscribe {res ->
-                recycler.apply {
+                main_recycler.apply {
                     layoutManager = LinearLayoutManager(this@MainActivity)
-                    moviesRecycler = MoviesRecycler(res, this@MainActivity)
+                    moviesRecycler = MainRecyclerAdapter(res, this@MainActivity)
                     adapter = moviesRecycler
                 }
             }

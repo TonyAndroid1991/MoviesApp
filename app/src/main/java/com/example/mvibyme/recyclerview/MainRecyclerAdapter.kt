@@ -15,14 +15,14 @@ import com.example.mvibyme.activities.MovieDetailsActivity
 import com.example.mvibyme.modelRequest.Result
 import java.io.Serializable
 
-class MoviesRecycler(private val results: ArrayList<Result>, var context: Context) : RecyclerView.Adapter<RecyclerView.ViewHolder>(){
+class MainRecyclerAdapter(private val results: ArrayList<Result>, var context: Context) : RecyclerView.Adapter<RecyclerView.ViewHolder>(){
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder {
         return MoviesViewholder(LayoutInflater.from(parent.context).inflate(R.layout.content_item, parent, false))
     }
 
     override fun getItemCount(): Int {
-        return results.size
+        return 10
     }
 
     override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) {
@@ -39,10 +39,10 @@ class MoviesRecycler(private val results: ArrayList<Result>, var context: Contex
        }
     }
 
-    class MoviesViewholder( itemView: View) : RecyclerView.ViewHolder(itemView) {
-        val movieTitle: TextView = itemView.findViewById(R.id.movie_title)
-        val movieDate: TextView = itemView.findViewById(R.id.movie_date)
-        val moviePoster: ImageView = itemView.findViewById(R.id.movie_poster)
+    class MoviesViewholder(itemView: View) : RecyclerView.ViewHolder(itemView) {
+        private val movieTitle: TextView = itemView.findViewById(R.id.movie_title)
+        private val movieDate: TextView = itemView.findViewById(R.id.movie_date)
+        private val moviePoster: ImageView = itemView.findViewById(R.id.movie_poster)
 
         fun bindElements(result: Result) {
 
